@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 export default function Home() {
 
     useEffect(() => {
-      document.addEventListener('becLoaded', function (event : any) {
+      document.addEventListener('becLoaded', function (event : unknown) {
         console.log("🚀 ~ event:", event)
         if (TE && TE.configureOfferWallStyle) {
            TE.configureOfferWallStyle({
