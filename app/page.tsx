@@ -33,7 +33,7 @@ export default function Home() {
         <div id='exchangeBanner'></div>
          <button className="mt-8" onClick={() => { 
               console.log('window.TE',window.TE);
-              if (window.TE) {
+              if (window.TE && window.TE.offerWall) {
                  window.TE?.offerWall();
               }
              
