@@ -2,13 +2,14 @@
 
 'use client';
 import { useEffect } from 'react';
+declare const TE;
 export default function Home() {
 
     useEffect(() => {
       document.addEventListener('becLoaded', function (event : unknown) {
         console.log("🚀 ~ event:", event)
-        if (TE && TE.configureOfferWallStyle) {
-           TE.configureOfferWallStyle({
+        if (typeof TE !== 'undefined' && TE.configureOfferWallStyle) {
+            TE.configureOfferWallStyle({
             topBar: {
                 backgroundColor: '#2c3e50',
                 textColor: '#ecf0f1'
@@ -26,7 +27,11 @@ export default function Home() {
                 outlineColor: '#3498db'
             }
         });
+        } else {
+            console.warn('TE is not defined or configureOfferWallStyle is missing.');
         }
+          
+        
     });
     }, []);
 
