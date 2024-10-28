@@ -7,12 +7,6 @@ export default function Home() {
 
   useEffect(() => {
      if (typeof window !== 'undefined') {
-           // call init TE
-        if (TE && typeof TE.onLoad === 'function') {
-          TE.onLoad()
-        } else {
-            console.error('initTE is not a function');
-        }
         document.addEventListener('becLoaded', function (event : unknown) {
           console.log("🚀 ~ event:", event)
           if (typeof TE !== 'undefined' && TE.configureOfferWallStyle) {

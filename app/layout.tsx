@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import Script from "next/script";
+import BecScript from '@/components/becScript';
+
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -29,11 +30,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
-      <Script
-        src="https://tma-demo.dmtp.tech/sdk/0.0.8/bec.js?walletAddress=39oXQfuzAVeV2QaqYzmAWC8w9sgl7Bvvhu%2FnrBf2bYw%3D"
-        strategy="beforeInteractive" // Loads the script after the page is interactive
-    
-      />
+        <BecScript />
       </body>
     </html>
   );
