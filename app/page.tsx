@@ -5,8 +5,10 @@ import { useEffect } from 'react';
 export default function Home() {
 
     useEffect(() => {
-      document.addEventListener('becLoaded', function (event) {
-        TE.configureOfferWallStyle({
+      document.addEventListener('becLoaded', function (event : any) {
+        console.log("🚀 ~ event:", event)
+        if (TE && TE.configureOfferWallStyle) {
+           TE.configureOfferWallStyle({
             topBar: {
                 backgroundColor: '#2c3e50',
                 textColor: '#ecf0f1'
@@ -24,6 +26,7 @@ export default function Home() {
                 outlineColor: '#3498db'
             }
         });
+        }
     });
     }, []);
 
@@ -32,9 +35,9 @@ export default function Home() {
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
         <div id='exchangeBanner'></div>
          <button className="mt-8" onClick={() => { 
-              console.log('window.TE',window.TE);
-              if (window.TE && window.TE.offerWall) {
-                 window.TE?.offerWall();
+              console.log('TE',TE);
+              if (TE && TE.offerWall) {
+                 TE?.offerWall();
               }
              
             } }> open offer wall </button>
