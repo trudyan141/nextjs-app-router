@@ -30,9 +30,9 @@ export default function RootLayout({
       >
         {children}
       <Script
-        src="https://tma-demo.dmtp.tech/sdk/0.0.7/bec.js?walletAddress=39oXQfuzAVeV2QaqYzmAWC8w9sgl7Bvvhu%2FnrBf2bYw%3D"
-        strategy="afterInteractive" // Loads the script after the page is interactive
-
+        src="https://tma-demo.dmtp.tech/sdk/0.0.8/bec.js?walletAddress=39oXQfuzAVeV2QaqYzmAWC8w9sgl7Bvvhu%2FnrBf2bYw%3D"
+        strategy="beforeInteractive" // Loads the script after the page is interactive
+    
       />
       </body>
     </html>

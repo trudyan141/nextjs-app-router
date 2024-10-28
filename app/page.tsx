@@ -6,37 +6,42 @@ declare const TE;
 export default function Home() {
 
   useEffect(() => {
-      if(TE !== undefined && TE.onLoaded) {
-        TE.onLoaded();
-      }
-
-      document.addEventListener('becLoaded', function (event : unknown) {
-        console.log("🚀 ~ event:", event)
-        if (typeof TE !== 'undefined' && TE.configureOfferWallStyle) {
-            TE.configureOfferWallStyle({
-            topBar: {
-                backgroundColor: '#2c3e50',
-                textColor: '#ecf0f1'
-            },
-            content: {
-                backgroundColor: '#34495e',
-                appNameColor: '#ecf0f1',
-                appDescriptionColor: '#bdc3c7'
-            },
-            button: {
-                backgroundColor: '#3498db',
-                textColor: '#ffffff',
-                highlightedBackgroundColor: '#2980b9',
-                highlightedTextColor: '#ffffff',
-                outlineColor: '#3498db'
-            }
-        });
+     if (typeof window !== 'undefined') {
+           // call init TE
+        if (TE && typeof TE.onLoad === 'function') {
+          TE.onLoad()
         } else {
-            console.warn('TE is not defined or configureOfferWallStyle is missing.');
+            console.error('initTE is not a function');
         }
+        document.addEventListener('becLoaded', function (event : unknown) {
+          console.log("🚀 ~ event:", event)
+          if (typeof TE !== 'undefined' && TE.configureOfferWallStyle) {
+              TE.configureOfferWallStyle({
+              topBar: {
+                  backgroundColor: '#2c3e50',
+                  textColor: '#ecf0f1'
+              },
+              content: {
+                  backgroundColor: '#34495e',
+                  appNameColor: '#ecf0f1',
+                  appDescriptionColor: '#bdc3c7'
+              },
+              button: {
+                  backgroundColor: '#3498db',
+                  textColor: '#ffffff',
+                  highlightedBackgroundColor: '#2980b9',
+                  highlightedTextColor: '#ffffff',
+                  outlineColor: '#3498db'
+              }
+          });
+          } else {
+              console.warn('TE is not defined or configureOfferWallStyle is missing.');
+          }
+            
           
-        
-    });
+      });
+    }
+  
     }, []);
 
   return (
