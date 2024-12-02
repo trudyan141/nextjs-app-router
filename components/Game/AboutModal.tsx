@@ -54,7 +54,7 @@ const AboutModal = ({ isOpen, onClose, gameInfo, environment, isTMA, role }) => 
           <h3>Environment</h3>
           <p>Current environment: {environment}</p>
           <h3>TMA mode</h3>
-          <p>Is in TMA: {isTMA}</p>
+          <p>Is in TMA: {isTMA?.toString()}</p>
           <button onClick={onClose}>Close</button>
         </div>
       </div>
