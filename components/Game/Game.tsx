@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect, useCallback } from 'react';
 import AboutModal from './AboutModal';
-import ScorePanel from './Scorepanel';
+import ScorePanel from './ScorePanel'
 import MainMenu from './MainMenu';
 import GameTitle from './GameTitle';
 import GameObject from './GameObject';
