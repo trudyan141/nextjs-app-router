@@ -1,10 +1,7 @@
 'use client';
-import Image from 'next/image';
 const GameObject = ({ position, onClick, imageUrl }) => (
-  <Image
+  <img
     src={imageUrl}
-    width={150}
-    height={150}
     style={{
       position: 'absolute',
       left: `${position.x}px`,

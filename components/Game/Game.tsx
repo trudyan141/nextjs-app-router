@@ -38,6 +38,9 @@ const Game = ({ config }) => {
     // Improved TMA detection
     const detectTMA = () => {
       const telegram = (window as any).Telegram;
+      console.log("🚀 ~ detectTMA ~ telegram:", telegram)
+      console.log("typeof telegram.WebApp.initData", typeof telegram.WebApp.initData)
+      console.log("telegram.WebApp.initData", telegram.WebApp.initData)
       if (telegram && telegram.WebApp) {
         // Additional checks to ensure it's a real Telegram WebApp
         if (typeof telegram.WebApp.initData === 'string' && 
