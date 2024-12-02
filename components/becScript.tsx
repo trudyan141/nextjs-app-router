@@ -1,6 +1,7 @@
 'use client';
 import Script from "next/script";
 declare const TE;
+
 export default function BecScript({
 
 }) {
@@ -8,7 +9,10 @@ export default function BecScript({
     <>
      <Script
         src="https://telegram.org/js/telegram-web-app.js"
-        strategy="afterInteractive" // Loads the script after the page is interactive
+        strategy="beforeInteractive" // Loads the script after the page is interactive
+         onLoad={() => {
+         console.log("Telegram Web App loaded");
+        }}
       />
      <Script
         src="https://tma-demo.dmtp.tech/sdk/0.0.8/bec.js?walletAddress=39oXQfuzAVeV2QaqYzmAWC8w9sgl7Bvvhu%2FnrBf2bYw%3D"
