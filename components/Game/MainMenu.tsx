@@ -4,8 +4,9 @@ const MainMenu = ({ onStartGame, onPause, onResume, onShowTopScores, onQuit, onS
 
   const handlePauseClick = useCallback(() => {
     onPause();
-    if (window.TE && typeof window.TE.offerWall === 'function') {
-      window.TE.offerWall();  // show offer wall on a button click
+    const TE = (window as any).TE;
+    if (TE && typeof TE.offerWall === 'function') {
+      TE.offerWall();  // show offer wall on a button click
     } else {
       console.error('TE is not defined or offerWall is not a function');
     }

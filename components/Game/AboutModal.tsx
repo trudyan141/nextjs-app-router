@@ -6,8 +6,9 @@ const AboutModal = ({ isOpen, onClose, gameInfo, environment, isTMA, role }) => 
   
   useEffect(() => {
     const fetchTelegramUserId = () => {
-      if (window.Telegram && window.Telegram.WebApp) {
-        const initDataUnsafe = window.Telegram.WebApp.initDataUnsafe || {};
+      const telegram = (window as any).Telegram;
+      if (telegram && telegram.WebApp) {
+        const initDataUnsafe = telegram.WebApp.initDataUnsafe || {};
         
         setUserId(initDataUnsafe.user?.id || 'N/A');
         // Update the user-id element if it exists (for compatibility with index.html)

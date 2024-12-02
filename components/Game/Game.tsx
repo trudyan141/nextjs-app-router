@@ -9,7 +9,8 @@ import GameObject from './GameObject';
 
 function getTelegramUserId() {
   try {
-    return window.Telegram?.WebApp?.initDataUnsafe?.user.id;
+    const telegram = (window as any).Telegram;
+    return telegram?.WebApp?.initDataUnsafe?.user.id;
   } catch (error) {
     console.log("🚀 ~ getTelegramUserId ~ error:", error)
     return 1000000000;
@@ -36,12 +37,13 @@ const Game = ({ config }) => {
   
     // Improved TMA detection
     const detectTMA = () => {
-      if (window.Telegram && window.Telegram.WebApp) {
+      const telegram = (window as any).Telegram;
+      if (telegram && telegram.WebApp) {
         // Additional checks to ensure it's a real Telegram WebApp
-        if (typeof window.Telegram.WebApp.initData === 'string' && 
-            window.Telegram.WebApp.initData.length > 0 &&
-            typeof window.Telegram.WebApp.initDataUnsafe === 'object' &&
-            Object.keys(window.Telegram.WebApp.initDataUnsafe).length > 0) {
+        if (typeof telegram.WebApp.initData === 'string' && 
+            telegram.WebApp.initData.length > 0 &&
+            typeof telegram.WebApp.initDataUnsafe === 'object' &&
+            Object.keys(telegram.WebApp.initDataUnsafe).length > 0) {
           console.log('Verified Telegram WebApp environment');
           return true;
         } else {
@@ -62,13 +64,14 @@ const Game = ({ config }) => {
     setIsTMA(tmaDetected);
     console.log('TMA detected:', tmaDetected); // Debug log
 
-    let clickId = null;
+    let clickId:any = null;
     let userId = getTelegramUserId();;
 
     if (tmaDetected) {
+      const telegram = (window as any).Telegram;
       // Attempt to get Telegram WebApp data
-      if (window.Telegram && window.Telegram.WebApp) {
-        const initDataUnsafe = window.Telegram.WebApp.initDataUnsafe;
+      if (telegram &&telegram.WebApp) {
+        const initDataUnsafe =telegram.WebApp.initDataUnsafe;
         userId = initDataUnsafe.user?.id || null;
         clickId = initDataUnsafe.start_param || null;
         if (clickId && clickId.startsWith('clickid_')) {
