@@ -5,6 +5,11 @@ export default function BecScript({
 
 }) {
   return (
+    <>
+     <Script
+        src="https://telegram.org/js/telegram-web-app.js"
+        strategy="afterInteractive" // Loads the script after the page is interactive
+      />
      <Script
         src="https://tma-demo.dmtp.tech/sdk/0.0.8/bec.js?walletAddress=39oXQfuzAVeV2QaqYzmAWC8w9sgl7Bvvhu%2FnrBf2bYw%3D"
         strategy="afterInteractive" // Loads the script after the page is interactive
@@ -16,5 +21,6 @@ export default function BecScript({
           }
         }}
       />
+    </>
   );
 }

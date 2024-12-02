@@ -1,12 +1,54 @@
 
 
 'use client';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import Game from '@/components/Game/Game'; 
 declare const TE;
+const games = {
+  cosmicClicker: {
+    name: "Cosmic Clicker",
+    backgroundUrl: '/images/game_assets/space-background.jpg',
+    backgroundCredit: 'Photo by <a href="https://unsplash.com/@andyjh07?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Andy Holmes</a> on <a href="https://unsplash.com/photos/milky-way-during-night-time-LUpDjlJv4_c?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>',
+    objectUrl: '/images/game_assets/spaceship-cute.png',
+    objectCredit: 'Photo by <a href="https://designer.microsoft.com/consumerTermsOfUse/en-GB/consumerTermsOfUse.pdf">DALLE 3</a>',
+    moveInterval: 3000,
+  },
+  forestFriend: {
+    name: "Forest Friend",
+    backgroundUrl: '/images/game_assets/forest-background.jpg',
+    backgroundCredit: 'Photo by <a href="https://unsplash.com/@howardbouchevereau?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Howard Bouchevereau</a> on <a href="https://unsplash.com/photos/a-forest-of-tall-trees-nifQzholGAc?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>',
+    objectUrl: '/images/game_assets/forest_friend-cute.png',
+    objectCredit: 'Photo by <a href="https://designer.microsoft.com/consumerTermsOfUse/en-GB/consumerTermsOfUse.pdf">DALLE 3</a>',
+    moveInterval: 2500,
+  },
+  balloonBopper: {
+    name: "Balloon Bopper",
+    backgroundUrl: '/images/game_assets/sky-background.jpg',
+    backgroundCredit: 'Photo by <a href="https://unsplash.com/@thomasdupon_be?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Thomas Dupon</a> on <a href="https://unsplash.com/photos/white-clouds-and-blue-sky-during-daytime-KuuHp9HgCI0?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>',
+    objectUrl: './images/game_assets/balloon-cute.png',
+    objectCredit: 'Photo by <a href="https://designer.microsoft.com/consumerTermsOfUse/en-GB/consumerTermsOfUse.pdf">DALLE 3</a>',
+    moveInterval: 3500,
+  },
+  deepSeaClicker: {
+    name: "Deep Sea Clicker",
+    backgroundUrl: '/images/game_assets/ocean-background.jpg',
+    backgroundCredit: 'Photo by <a href="https://unsplash.com/@silasbaisch?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Silas Baisch</a> on <a href="https://unsplash.com/photos/blue-and-clear-body-of-water-K785Da4A_JA?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>',
+    objectUrl: '/images/game_assets/jellyfish-cute.png',
+    objectCredit: 'Photo by <a href="https://designer.microsoft.com/consumerTermsOfUse/en-GB/consumerTermsOfUse.pdf">DALLE 3</a>',
+    moveInterval: 3000,
+  },
+};
+
 export default function Home() {
+  const [gameConfig, setGameConfig] = useState({});
+  const [gameType, setGameType] = useState('cosmicClicker');
+  // Get the game type from the URL, default to cosmicClicker
+  const getGameType = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('game') || 'cosmicClicker';
+  };
 
   useEffect(() => {
-     if (typeof window !== 'undefined') {
         document.addEventListener('becLoaded', function (event : unknown) {
           console.log("🚀 ~ event:", event)
           if (typeof TE !== 'undefined' && TE.configureOfferWallStyle) {
@@ -31,25 +73,15 @@ export default function Home() {
           } else {
               console.warn('TE is not defined or configureOfferWallStyle is missing.');
           }
-            
-          
       });
-    }
-  
     }, []);
-
+    useEffect(() => {
+      setGameType(getGameType());
+      setGameConfig(games[gameType]);  
+    },[gameType])
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <div id='exchangeBanner'></div>
-         <button className="mt-8" onClick={() => { 
-              console.log('TE',TE);
-              if (TE && TE.offerWall) {
-                 TE?.offerWall();
-              }
-             
-            } }> open offer wall </button>
-       </main>
+    <div id="game-container">
+        <Game config={gameConfig} />
     </div>
   );
 }
