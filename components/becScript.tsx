@@ -13,8 +13,8 @@ export default function BecScript({
   }, []);
    const scriptSrc =
     env === "dev"
-      ? "https://tma-demo.dmtp.tech/sdk/0.0.8/bec.js?walletAddress=QnLOYksIDhA3MfBLoRL%2ByIa8jRggeovB3NtN3d7LD7g%3D"
-      : "https://bec.dmtp.tech/0.0.8/bec.js?walletAddress=QnLOYksIDhA3MfBLoRL%2ByIa8jRggeovB3NtN3d7LD7g%3D";
+      ? "https://trudyan141.github.io/banner-exchange/dist/bec.js?walletAddress=QnLOYksIDhA3MfBLoRL%2ByIa8jRggeovB3NtN3d7LD7g%3D"
+      : "https://trudyan141.github.io/banner-exchange/dist/bec.js?walletAddress=QnLOYksIDhA3MfBLoRL%2ByIa8jRggeovB3NtN3d7LD7g%3D";
   return (
     <>
      <Script
@@ -27,13 +27,7 @@ export default function BecScript({
       {env && <Script
         src={scriptSrc}
         strategy="afterInteractive" // Loads the script after the page is interactive
-        onLoad={() => {
-          if (typeof TE.onLoad === "function") {
-            TE.onLoad();
-          } else {
-            console.error('TE.onLoad is not a function');
-          }
-        }}
+      
       />}
     </>
   );
