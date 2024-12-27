@@ -1,7 +1,7 @@
 'use client';
 import Script from "next/script";
 import { useState , useEffect} from "react";
-declare const TE;
+
 
 export default function BecScript({
 }) {
