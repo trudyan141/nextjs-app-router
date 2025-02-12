@@ -1,6 +1,7 @@
 'use client';
 import Script from "next/script";
 import { useState , useEffect} from "react";
+declare const TE;
 
 
 export default function BecScript({
@@ -30,7 +31,13 @@ export default function BecScript({
       {env && <Script
         src={scriptSrc}
         strategy="afterInteractive" // Loads the script after the page is interactive
-      
+        onLoad={() => {
+          if (TE && typeof TE.onLoad === "function") {
+            TE.onLoad();
+          } else {
+            console.error('TE.onLoad is not a function');
+          }
+        }}
       />}
     </>
   );
