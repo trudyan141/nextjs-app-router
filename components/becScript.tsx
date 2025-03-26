@@ -31,9 +31,16 @@ export default function BecScript({
       {env && <Script
         src={scriptSrc}
         strategy="afterInteractive" // Loads the script after the page is interactive
-        onLoad={() => {
+        onLoad={async () => {
           if (TE && typeof TE.onLoad === "function") {
-            TE.onLoad();
+            await TE.onLoad();
+            // Call reportEvent after onLoad completed (Optional for publisher script)
+            if (TE && typeof TE.reportEvent === 'function') {
+              TE.reportEvent({
+                  action: 'CLICK', // OR 'PLAY'
+                  // click_id  // OPTIONAL
+              });
+            }
           } else {
             console.error('TE.onLoad is not a function');
           }
